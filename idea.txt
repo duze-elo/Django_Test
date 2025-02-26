@@ -1,0 +1,12 @@
+if not logged in:
+    view apps demos 
+if logged in:
+    gain personal access to apps
+    save apps states and info in db
+
+apps to do:
+    1. todo
+    2. notes
+    3. flashcards
+    4. appointments with email notifications
+    5. qr code generator
