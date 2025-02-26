@@ -1,3 +1,8 @@
-<h1>TEST</h1>
+{% extends "base.html" %} {% block title %} Dashboard {% endblock title %}
+{% block content %}
+
 <h2>logged user: {{ user.username}}</h2>
-<a href="{% url "login" %}">Logout</a>
+<p>Is authenticated: {{ user.is_authenticated }}</p>
+<a href="{% url "logout" %}">Logout</a>
+
+{% endblock content %}
