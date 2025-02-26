@@ -1,10 +1,26 @@
 {% extends "base.html" %} {% block title %} Login {% endblock title %}
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-<a href="{% url "register" %}">Not registered yet?</a>
+<style>
+    input.form-control {
+        width: 250px;
+    }
+</style>
+<div class="login-container">
+    <h2>Login form</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <a class="" href="{% url "register" %}">Not registered yet?</a>
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Check login details and try again.</strong>
+        </div>
+    {% endif %}
+
+</div>
+
 {% endblock content %}
