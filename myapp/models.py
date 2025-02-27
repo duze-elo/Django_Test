@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class TodoList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, verbose_name="List Name")
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -14,7 +14,7 @@ class TodoList(models.Model):
 
 class TodoItem(models.Model):
     todo_list = models.ForeignKey(TodoList, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, verbose_name="Item Name")
     completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
 

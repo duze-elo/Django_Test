@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Create List{% endblock title %}
+{% block content %}
+
+<style>
+    .create-link {
+        font-size: 20px;
+        color: #fff;
+        background-color: #E54B4B;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+</style>
+
+<p>
+    <h1>Create New List</h1>
+    <a class="create-link" href="{% url 'todos' %}">Go back</a>
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <label for="id_title">List Title:</label>
+    <input type="text" name="title" id="id_title" required><br><br>
+
+    <h3>Todo Items:</h3>
+    <div id="items-container">
+        <div class="item">
+            <input type="text" name="items[]" placeholder="Todo item title">
+            <label>
+                Completed? <input type="checkbox" name="completed[]">
+            </label>
+        </div>
+    </div>
+
+    <button type="button" id="add-item">Add Item</button>
+    <br><br>
+    <button type="submit">Create List</button>
+</form>
+
+<script>
+    document.getElementById('add-item').addEventListener('click', function() {
+        let container = document.getElementById('items-container');
+        let newItem = document.createElement('div');
+        newItem.classList.add('item');
+        newItem.innerHTML = `
+            <input type="text" name="items[]" placeholder="Todo item title">
+            <input type="hidden" name="completed[]" value="off">
+            <label>
+                Completed? <input type="checkbox" name="completed[]" value="on">
+            </label>
+            <button type="button" class="remove-item">Remove</button>
+        `;
+        container.appendChild(newItem);
+
+        newItem.querySelector('.remove-item').addEventListener('click', function() {
+            container.removeChild(newItem);
+        });
+    });
+</script>
+
+
+{% endblock content %}

@@ -26,9 +26,19 @@
         padding: 5px;
         border-radius: 5px;
     }
+    .create-link {
+        font-size: 20px;
+        color: #fff;
+        background-color: #4FB477;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
 </style>
 
-<h1>Todo Lists</h1><br>
+<p>
+    <h1>Todo Lists</h1>
+    <a class="create-link" href="{% url 'todo_create' %}">Create a new list</a>
+</p>
 {% if not lists %}
     <h2>No Todo Lists Found</h2>
 {% endif %}
