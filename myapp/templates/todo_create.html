@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <button type="button" id="add-item">Add Item</button>
+    <button type="button" id="add-item">+</button>
     <br><br>
     <button type="submit">Create List</button>
 </form>
@@ -48,7 +48,7 @@
             <label>
                 Completed? <input type="checkbox" name="completed[]" value="on">
             </label>
-            <button type="button" class="remove-item">Remove</button>
+            <button type="button" class="remove-item">-</button>
         `;
         container.appendChild(newItem);
 
@@ -57,6 +57,5 @@
         });
     });
 </script>
-
 
 {% endblock content %}

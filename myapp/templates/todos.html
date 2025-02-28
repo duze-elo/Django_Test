@@ -45,11 +45,16 @@
 
 {% for list in lists %}
     <h2>{{ list.title }}</h2>
+    <form action="{% url 'delete_todo_list' list.id %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('Cnąć tę listę?')">🗑️ Usuń listę</button>
+    </form>
     <table class="shadow-lg">
         <thead>
             <tr>
                 <th class="col-10">Title</th>
                 <th class="text-center">Status</th>
+                <th>Remove List</th>
             </tr>
         </thead>
         <tbody>
@@ -62,6 +67,12 @@
                         {% else %}
                             <span class="badge badge-danger">Not Completed</span>
                         {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <form action="{% url 'delete_todo_item' todo.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Czy na pewno chcesz usunąć ten item?')">🗑️ Usuń</button>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

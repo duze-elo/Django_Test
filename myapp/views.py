@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import TodoItem, TodoList
 from django.contrib.auth.decorators import login_required
-from .forms.todo_create import TodoListForm, TodoItemForm
 
 # Create your views here.
 def home(request):
@@ -38,3 +37,15 @@ def create_todo_list(request):
             return redirect("todos")
 
     return render(request, "todo_create.html")
+
+@login_required
+def delete_todo_list(request, list_id):
+    todo_list = get_object_or_404(TodoList, id=list_id, user=request.user)
+    todo_list.delete()
+    return redirect('todos')
+
+@login_required
+def delete_todo_item(request, item_id):
+    todo_item = get_object_or_404(TodoItem, id=item_id, todo_list__user=request.user)
+    todo_item.delete()
+    return redirect('todos')
