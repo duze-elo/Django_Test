@@ -1,50 +1,6 @@
 {% extends "base.html" %} {% block title %}Create List{% endblock title %}
 {% block content %}
 
-<style>
-    .create-link {
-        font-size: 20px;
-        color: #fff;
-        background-color: #E54B4B;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-    table {
-        width: 75%;
-        border-collapse: collapse;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-        background-color: #D6FFB7;
-    }
-
-    th {
-        background-color: #7AE7C7;
-    }
-
-    span {
-        width: 100px;
-        padding: 5px;
-        border-radius: 5px;
-    }
-    .create-link {
-        font-size: 20px;
-        color: #fff;
-        background-color: #4FB477;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-    hr {
-        border-top: 1px solid black;
-    }
-</style>
-
 <p>
     <h1>Create New List</h1>
     <a class="create-link" href="{% url 'todos' %}">Go back</a>
@@ -58,7 +14,7 @@
             <tr>
                 <th>
                     <label for="id_title">List Title:</label>
-                    <input type="text" name="title" id="id_title" required>
+                    <input type="text" class="form-control" name="title" id="id_title" placeholder="Todo list title" required>
                 </th>
             </tr>
         </thead>
@@ -68,18 +24,19 @@
                     <h3>Todo Items:</h3>
                     <div id="items-container">
                         <div class="item">
-                            <input type="text" name="items[]" placeholder="Todo item title">
+                            <input type="text" class="form-control" name="items[]" placeholder="Todo item title">
                             <label>
                                 Completed? <input type="checkbox" name="completed[]">
                             </label>
-                        <button type="button" id="add-item">+</button>
                         </div>
                     </div>
+                    <hr>
+                    <button type="button" class="btn btn-primary" id="add-item">Add Item</button>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button type="submit">Create List</button>
+                    <button type="submit" class="btn btn-primary">Create List</button>
                 </td>
             </tr>
         </tbody>
@@ -93,12 +50,12 @@
         newItem.classList.add('item');
         newItem.innerHTML = `
             <hr>
-            <input type="text" name="items[]" placeholder="Todo item title">
+            <input type="text" class="form-control" name="items[]" placeholder="Todo item title">
             <input type="hidden" name="completed[]" value="off">
             <label>
                 Completed? <input type="checkbox" name="completed[]" value="on">
             </label>
-            <button type="button" class="remove-item">-</button>
+            <button type="button" class="remove-item btn btn-dark">🗑️</button>
         `;
         container.appendChild(newItem);
 

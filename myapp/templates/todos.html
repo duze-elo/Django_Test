@@ -1,40 +1,6 @@
 {% extends "base.html" %} {% block title %}Todos{% endblock title %}
 {% block content %}
 
-<style>
-    table {
-        width: 75%;
-        border-collapse: collapse;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-        background-color: #D6FFB7;
-    }
-
-    th {
-        background-color: #7AE7C7;
-    }
-
-    span {
-        width: 100px;
-        padding: 5px;
-        border-radius: 5px;
-    }
-    .create-link {
-        font-size: 20px;
-        color: #fff;
-        background-color: #4FB477;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-</style>
-
 <p>
     <h1>Todo Lists</h1>
     <a class="create-link" href="{% url 'todo_create' %}">Create a new list</a>

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,24 +10,7 @@
       {% endblock %}
     </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"  rel="stylesheet" />
-    <style>
-      .bg-custom {
-        background-color: #CECFC7;
-        color:  #000000;
-        padding: 15px;
-      }
-      .navbar-custom {
-        background-color: #EFF8E2;
-        border-radius: 30px;
-        margin-bottom: 20px;
-      }
-      .navbar-custom .navbar-brand,
-      .navbar-custom .nav-link {
-        color: #000000;
-      }
-      .errorlist {
-        display: none;
-      }
+    <link rel="stylesheet" href="{% static "styles/main.css" %}" rel="stylesheet">
     </style>
   </head>
   <body class="bg-custom">
