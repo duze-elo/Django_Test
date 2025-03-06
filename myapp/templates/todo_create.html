@@ -9,6 +9,40 @@
         padding: 5px 10px;
         border-radius: 5px;
     }
+    table {
+        width: 75%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        background-color: #D6FFB7;
+    }
+
+    th {
+        background-color: #7AE7C7;
+    }
+
+    span {
+        width: 100px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .create-link {
+        font-size: 20px;
+        color: #fff;
+        background-color: #4FB477;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    hr {
+        border-top: 1px solid black;
+    }
 </style>
 
 <p>
@@ -19,22 +53,37 @@
 <form method="post">
     {% csrf_token %}
 
-    <label for="id_title">List Title:</label>
-    <input type="text" name="title" id="id_title" required><br><br>
-
-    <h3>Todo Items:</h3>
-    <div id="items-container">
-        <div class="item">
-            <input type="text" name="items[]" placeholder="Todo item title">
-            <label>
-                Completed? <input type="checkbox" name="completed[]">
-            </label>
-        </div>
-    </div>
-
-    <button type="button" id="add-item">+</button>
-    <br><br>
-    <button type="submit">Create List</button>
+    <table class="shadow-lg">
+        <thead>
+            <tr>
+                <th>
+                    <label for="id_title">List Title:</label>
+                    <input type="text" name="title" id="id_title" required>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <h3>Todo Items:</h3>
+                    <div id="items-container">
+                        <div class="item">
+                            <input type="text" name="items[]" placeholder="Todo item title">
+                            <label>
+                                Completed? <input type="checkbox" name="completed[]">
+                            </label>
+                        <button type="button" id="add-item">+</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Create List</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </form>
 
 <script>
@@ -43,6 +92,7 @@
         let newItem = document.createElement('div');
         newItem.classList.add('item');
         newItem.innerHTML = `
+            <hr>
             <input type="text" name="items[]" placeholder="Todo item title">
             <input type="hidden" name="completed[]" value="off">
             <label>
