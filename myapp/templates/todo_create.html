@@ -22,16 +22,28 @@
             <tr>
                 <td>
                     <h3>Todo Items:</h3>
-                    <div id="items-container">
+                    {% comment %} <div id="items-container">
                         <div class="item">
                             <input type="text" class="form-control" name="items[]" placeholder="Todo item title">
+                            <input type="hidden" name="completed[]" value="false">
                             <label>
-                                Completed? <input type="checkbox" name="completed[]">
+                                Completed? <input type="checkbox" name="completed[]" value="true">
                             </label>
                         </div>
                     </div>
                     <hr>
-                    <button type="button" class="btn btn-primary" id="add-item">Add Item</button>
+                    <button type="button" class="btn btn-primary" id="add-item">Add Item</button> {% endcomment %}
+                    <div id="items-container">
+                        <div class="item">
+                            <input type="text" class="form-control" name="item_0_title" placeholder="Todo item title">
+                            <input type="hidden" name="item_0_completed" value="false">
+                            <label>
+                                Completed? <input type="checkbox" name="item_0_completed" value="true">
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="button" id="add-item">Add Item</button>
                 </td>
             </tr>
             <tr>
@@ -44,24 +56,22 @@
 </form>
 
 <script>
+    let itemIndex = 1;
+
     document.getElementById('add-item').addEventListener('click', function() {
         let container = document.getElementById('items-container');
         let newItem = document.createElement('div');
         newItem.classList.add('item');
         newItem.innerHTML = `
             <hr>
-            <input type="text" class="form-control" name="items[]" placeholder="Todo item title">
-            <input type="hidden" name="completed[]" value="off">
+            <input type="text" class="form-control" name="item_${itemIndex}_title" placeholder="Todo item title">
+            <input type="hidden" name="item_${itemIndex}_completed" value="false">
             <label>
-                Completed? <input type="checkbox" name="completed[]" value="on">
+                Completed? <input type="checkbox" name="item_${itemIndex}_completed" value="true">
             </label>
-            <button type="button" class="remove-item btn btn-dark">🗑️</button>
         `;
         container.appendChild(newItem);
-
-        newItem.querySelector('.remove-item').addEventListener('click', function() {
-            container.removeChild(newItem);
-        });
+        itemIndex++;
     });
 </script>
 
