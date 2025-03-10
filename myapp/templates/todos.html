@@ -13,7 +13,7 @@
     <h2>{{ list.title }}</h2>
     <form action="{% url 'delete_todo_list' list.id %}" method="POST" style="display:inline;">
         {% csrf_token %}
-        <button type="submit" onclick="return confirm('Cnąć tę listę?')">🗑️ Delete List</button>
+        <button type="submit" onclick="return confirm('Are You sure to remove the list?')">🗑️ Delete List</button>
     </form>
     <table class="shadow-lg">
         <thead>
@@ -37,7 +37,7 @@
                     <td class="text-center">
                         <form action="{% url 'delete_todo_item' todo.id %}" method="POST" style="display:inline;">
                             {% csrf_token %}
-                            <button type="submit" onclick="return confirm('Czy na pewno chcesz usunąć ten item?')">🗑️</button>
+                            <button type="submit" onclick="return confirm('Are You sure to remove the component?')">🗑️</button>
                         </form>
                     </td>
                 </tr>
