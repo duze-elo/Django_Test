@@ -15,35 +15,40 @@
         {% csrf_token %}
         <button type="submit" onclick="return confirm('Are You sure to remove the list?')">🗑️ Delete List</button>
     </form>
-    <table class="shadow-lg">
-        <thead>
-            <tr>
-                <th class="col-10">Title</th>
-                <th class="text-center">Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for todo in list.todoitem_set.all %}
+    <div class="table-responsive shadow-lg border border-dark">
+        <table class="col-12">
+            <thead>
                 <tr>
-                    <td>{{ todo.title }}</td>
-                    <td class="text-center">
-                        {% if todo.completed %}
-                            <span class="badge badge-success">Completed</span>
-                        {% else %}
-                            <span class="badge badge-danger">Not Completed</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-center">
-                        <form action="{% url 'delete_todo_item' todo.id %}" method="POST" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" onclick="return confirm('Are You sure to remove the component?')">🗑️</button>
-                        </form>
-                    </td>
+                    <th class="col-8">Title</th>
+                    <th class="col-2 text-center">Status</th>
+                    <th class="col-1">Change Status</th>
+                    <th class="col-1">Remove</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table><br>
+            </thead>
+            <tbody>
+                {% for todo in list.todoitem_set.all %}
+                    <tr>
+                        <td>{{ todo.title }}</td>
+                        <td class="text-center">
+                            {% if todo.completed %}
+                                <span class="badge badge-success">Completed</span>
+                            {% else %}
+                                <span class="badge badge-danger">Not Completed</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                        </td>
+                        <td class="text-center">
+                            <form action="{% url 'delete_todo_item' todo.id %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" onclick="return confirm('Are You sure to remove the component?')">🗑️</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div><br>
 {% endfor %}
 
 {% endblock content %}
