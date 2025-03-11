@@ -1,6 +1,13 @@
 {% extends "base.html" %} {% block title %}Todos{% endblock title %}
 {% block content %}
 
+<style>
+    button{
+        background: transparent;
+        border: none;
+    }
+</style>
+
 <p>
     <h1>Todo Lists</h1>
     <a class="create-link" href="{% url 'todo_create' %}">Create a new list</a>
@@ -21,8 +28,7 @@
                 <tr>
                     <th class="col-8">Title</th>
                     <th class="col-2 text-center">Status</th>
-                    <th class="col-1">Change Status</th>
-                    <th class="col-1">Remove</th>
+                    <th class="col-1">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,8 +47,6 @@
                                 {% csrf_token %}
                                 <button type="submit" onclick="return confirm('Are You sure to change the components status?')">🔄️</button>
                             </form>
-                        </td>
-                        <td class="text-center">
                             <form action="{% url 'delete_todo_item' todo.id %}" method="POST" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" onclick="return confirm('Are You sure to remove the component?')">🗑️</button>
