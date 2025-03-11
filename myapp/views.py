@@ -56,3 +56,13 @@ def delete_todo_item(request, item_id):
     todo_item = get_object_or_404(TodoItem, id=item_id, todo_list__user=request.user)
     todo_item.delete()
     return redirect('todos')
+
+@login_required
+def change_todo_item_status(request, item_id):
+    todo_item = get_object_or_404(TodoItem, id=item_id, todo_list__user=request.user)
+    if todo_item.completed:
+        todo_item.completed = False
+    else:
+        todo_item.completed = True
+    todo_item.save()
+    return redirect('todos')

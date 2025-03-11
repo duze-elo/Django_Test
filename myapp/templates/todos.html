@@ -37,6 +37,10 @@
                             {% endif %}
                         </td>
                         <td class="text-center">
+                            <form action="{% url 'change_todo_item_status' todo.id %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" onclick="return confirm('Are You sure to change the components status?')">🔄️</button>
+                            </form>
                         </td>
                         <td class="text-center">
                             <form action="{% url 'delete_todo_item' todo.id %}" method="POST" style="display:inline;">
