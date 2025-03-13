@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import TodoItem, TodoList
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -66,3 +69,29 @@ def change_todo_item_status(request, item_id):
         todo_item.completed = True
     todo_item.save()
     return redirect('todos')
+
+@csrf_exempt
+def add_todo_item(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            list_id = data.get("list_id")
+            title = data.get("title")
+            completed = data.get("completed", False)
+
+            todo_list = TodoList.objects.get(id=list_id)
+            new_item = TodoItem.objects.create(
+                title = title,
+                completed = completed,
+                todo_list = todo_list
+            )
+
+            return JsonResponse({
+                "success": True,
+                "item_id": new_item.id,
+                "title": new_item.title,
+                "completed": new_item.completed
+            })
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+    return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
