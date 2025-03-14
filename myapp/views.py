@@ -46,8 +46,6 @@ def create_todo_list(request):
 
     return render(request, "todo_create.html")
 
-
-
 @login_required
 def delete_todo_list(request, list_id):
     todo_list = get_object_or_404(TodoList, id=list_id, user=request.user)
@@ -70,28 +68,16 @@ def change_todo_item_status(request, item_id):
     todo_item.save()
     return redirect('todos')
 
-@csrf_exempt
-def add_todo_item(request):
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-            list_id = data.get("list_id")
-            title = data.get("title")
-            completed = data.get("completed", False)
+@login_required
+def add_todo_item(request, list_id):
+    todo_list = get_object_or_404(TodoList, id=list_id, user=request.user)
+    title = request.POST.get("title")
+    completed = request.POST.get("completed") == "true"
 
-            todo_list = TodoList.objects.get(id=list_id)
-            new_item = TodoItem.objects.create(
-                title = title,
-                completed = completed,
-                todo_list = todo_list
-            )
-
-            return JsonResponse({
-                "success": True,
-                "item_id": new_item.id,
-                "title": new_item.title,
-                "completed": new_item.completed
-            })
-        except Exception as e:
-            return JsonResponse({"success": False, "error": str(e)})
-    return JsonResponse({"success": False, "error": "Invalid request"}, status=400)
+    if title:
+        TodoItem.objects.create(
+            todo_list=todo_list,
+            title=title,
+            completed=completed
+        )
+    return redirect('todos')
