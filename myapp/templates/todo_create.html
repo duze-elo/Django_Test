@@ -1,5 +1,13 @@
 {% extends "base.html" %} {% block title %}Create List{% endblock title %}
 {% block content %}
+{% load static %}
+
+<style>
+    button{
+        background: transparent;
+        border: none;
+    }
+</style>
 
 <p>
     <h1>Create New List</h1>
@@ -33,7 +41,7 @@
                             </div>
                         </div>
 
-                        <button type="button" id="add-item">Add Item</button>
+                        <button type="button" id="add-item"><img src="{% static "icons/circle-plus.png" %}" alt="add todo"></button>
                     </td>
                 </tr>
                 <tr>
