@@ -1,6 +1,15 @@
 {% extends "base.html" %} {% block title %} Home Page {% endblock title %}
 {% block content %}
 
-<h1>This is Home Page of My Django apps</h1> 
+<h1>This is Home Page of My Django apps</h1>
+{% if not user.is_authenticated %}
+    <h4>Aim of this project is to learn basics of mvc and django</h4>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <h4>Django is very friendly and not overwhelming.</h4>
+    <h4>Im glad i picked it up as one of my first frameworks, it was a more plesant expirience than Laravel that i learned in class.</h4>
+    <h4>Propably becouse other frameworks greet the new user with ton of folders and files with similiar names and unintuitive arrangement of files.</h4>
+{% endif %}
 
 {% endblock %}
